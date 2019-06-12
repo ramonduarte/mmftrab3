@@ -67,20 +67,10 @@ for q in quotes:
     frame.loc[frame["series"]==q[0], "option price"] = float(q[4].replace(",", "."))
 
 
-frame['implied volatility'] = frame.apply(lambda x: implied_volatility(x['value_1'],
+frame['implied volatility'] = frame.apply(lambda x: implied_volatility(x['option price'],
                                                                        x['call'],
                                                                        29.85,
                                                                        x['strike price'],
                                                                        x['exercise date'],
-                                                                       x["option price"]), axis=1)
-
-new_table = pd.DataFrame(columns=range(0,2), index = [0]) # I know the size 
-
-row_marker = 0
-for row in table.find_all('tr'):
-    column_marker = 0
-    columns = row.find_all('td')
-    for column in columns:
-        new_table.iat[row_marker,column_marker] = column.get_text()
-        column_marker += 1
+                                                                       0.065), axis=1)
 
