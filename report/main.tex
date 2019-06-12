@@ -46,19 +46,23 @@
 
 \section*{Introdução} % Unnumbered section
 
-O objetivo do Projeto III é implementar, avaliar e comparar o algoritmo recursivo proposto pelo livro no capítulo 1.3 e o Método de Monte-Carlo, aplicados à determinação do valor de contratos americanos e europeus de opção de compra e venda, realizando comparações de cunho matemático-estatístico e produzindo gráficos com tais observações. 
+O objetivo do Projeto III é implementar, avaliar e comparar o modelo de Black-Scholes com os dados fornecidos pelo mundo real, realizando comparações de cunho matemático-estatístico e produzindo gráficos com tais observações acerca da volatilidade implícita, do preço de corte (\emph{strike price} e dos recortes temporais). 
 
-Para tal, foi utilizada a linguagem \emph{Python 3.6.7}, com os módulos \emph{numpy} (métodos numéricos) e \emph{matplotlib.pyplot} (visualização de dados).
-O programa requer a instalação destes módulos, mas possui uma ferramenta de instalação automatizada das dependências (\emph{pipenv}). 
+Para tal, foi utilizada a linguagem \emph{Python 3.6.7}, com os módulos \emph{numpy} (métodos numéricos), \emph{pandas} (manipulação de dados), \emph{scipy} (fórmulas científicas) e \emph{matplotlib.pyplot} (visualização de dados).
 
-O código utilizado neste trabalho, bem como o deste relatório e as imagens geradas, foi aberto e disponibilizado publicamente no repositório https://github.com/ramonduarte/mmftrab2.
+Os dados utilizados para a confecção das comparações foi raspado da web utilizando as ferramentas \emph{bs4} (web parsing), \emph{lxml} (HTML parsing) e \emph{re} (expressões regulares). O programa requer a instalação destes módulos, mas possui uma ferramenta de instalação automatizada das dependências (\emph{pipenv}). 
+
+As fontes dos dados são a B3 (Brasil Bolsa Balcão, operadora da Bolsa de Valores de São Paulo) e o jornal Valor Econômico. Todos os dados são referentes ao mercado logo após o fechamento (17:00) do dia 6º de junho de 2019.
+
+
+O código utilizado neste trabalho, bem como o deste relatório e as imagens geradas, foi aberto e disponibilizado publicamente no repositório https://github.com/ramonduarte/mmftrab3.
 
 
 %----------------------------------------------------------------------------------------
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\section*{Atividade a} % Numbered section
+\section*{Atividade \emph{a}} % Numbered section
 
 Nesta atividade, foi implementado o algoritmo sugerido no livro em seu capítulo 1.3.
 O procedimento é composto de três etapas:
