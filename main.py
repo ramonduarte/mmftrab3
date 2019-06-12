@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import math
+import re
 from scipy.stats import norm
 from bs4 import BeautifulSoup
 
@@ -61,6 +62,10 @@ with open("html/Opções de compra | Valor Econômico.html") as f:
     html_string = f.read()
 soup = BeautifulSoup(html_string, 'lxml')
 table = soup.find_all('table')[0]
+rows = table.find_all('tr', {'class': 'row'})[2:] # skip first 2 rows
+
+regexp = r"^([A-Z]{5}\d+)([A-Z]{4})\s+[O|P|N]{2,4}([a-z]{3}/\d{2})(\d+.\d+)-*(\d+.\d+)"
+quotes = [re.search(regexp, i.get_text()).groups() for i in rows]
 
 new_table = pd.DataFrame(columns=range(0,2), index = [0]) # I know the size 
 
