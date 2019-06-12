@@ -29,7 +29,8 @@
 
 \title{MAE001: Modelagem Matemática em Finanças I} % Title of the assignment
 
-\author{Ramon Duarte de Melo\\ \texttt{ramonduarte@poli.ufrj.br}} % Author name and email address
+\author{Ramon Duarte de Melo\\ \texttt{ramonduarte@poli.ufrj.br} % Author name and email address
+\\ Alex Teixeira\\ \texttt{ramonduarte@poli.ufrj.br}} % Author name and email address
 
 \date{Universidade Federal do Rio de Janeiro (UFRJ) --- \today} % University, school and/or department name(s) and a date
 
@@ -45,7 +46,7 @@
 
 \section*{Introdução} % Unnumbered section
 
-O objetivo do Projeto I é implementar, avaliar e comparar o algoritmo recursivo proposto pelo livro no capítulo 1.3 e o Método de Monte-Carlo, aplicados à determinação do valor de contratos americanos e europeus de opção de compra e venda, realizando comparações de cunho matemático-estatístico e produzindo gráficos com tais observações. 
+O objetivo do Projeto III é implementar, avaliar e comparar o algoritmo recursivo proposto pelo livro no capítulo 1.3 e o Método de Monte-Carlo, aplicados à determinação do valor de contratos americanos e europeus de opção de compra e venda, realizando comparações de cunho matemático-estatístico e produzindo gráficos com tais observações. 
 
 Para tal, foi utilizada a linguagem \emph{Python 3.6.7}, com os módulos \emph{numpy} (métodos numéricos) e \emph{matplotlib.pyplot} (visualização de dados).
 O programa requer a instalação destes módulos, mas possui uma ferramenta de instalação automatizada das dependências (\emph{pipenv}). 
@@ -57,7 +58,7 @@ O código utilizado neste trabalho, bem como o deste relatório e as imagens ger
 %	PROBLEM 1
 %----------------------------------------------------------------------------------------
 
-\section*{Atividade 1} % Numbered section
+\section*{Atividade a} % Numbered section
 
 Nesta atividade, foi implementado o algoritmo sugerido no livro em seu capítulo 1.3.
 O procedimento é composto de três etapas:
@@ -96,7 +97,7 @@ Foram calculados os valores para 10 simulações, tais que $N = 2^{k}; k = 1, 2,
 %----------------------------------------------------------------------------------------
 
 
-\section*{2ª Questão}
+\section*{Atividade b}
 
 Os boxplots foram gerados usando o módulo \emph{matplotlib.pyplot.boxplot}.
 Para facilitar a comparação dos boxplots, eles foram agrupados em subplots no mesmo gráfico.
@@ -114,7 +115,7 @@ Para facilitar a comparação dos boxplots, eles foram agrupados em subplots no 
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 
-\section*{3ª Questão}
+\section*{Atividade c}
 
 Para esta questão, os boxplots foram refeitos utilizando os parâmetros $\Delta t = 0.25$ e $u = 1/d = \sqrt{1.024}$.
 Esta configuração gerou uma variância consideravelmente menor, bem como uma quantidade significativamente menor de \emph{outliers}.
@@ -132,46 +133,6 @@ A redução da variância em distribuições probabilísticas por conta da ampli
 \end{figure}
 
 
-%----------------------------------------------------------------------------------------
-%	PROBLEM 2
-%----------------------------------------------------------------------------------------
-
-\section*{4ª Questão}
-
-O valor esperado de crescimento dos ativos com estes parâmetros é zero, isto é, $E[S(n)] = E[S(n+1)]$.
-Portanto, o valor esperado para a média é o mesmo que o inicial do ativo: $E[\bar{S}] = E[S_{0}]$.
-
-Os resultados obtidos convergem fortemente para o previsto na teoria.
-A maior variação da média dos passeios aleatórios foi inferior a 3\%, no boxplot $n = 250$ da terceira questão.
-
-%----------------------------------------------------------------------------------------
-
-
-%----------------------------------------------------------------------------------------
-%	PROBLEM 2
-%----------------------------------------------------------------------------------------
-
-\section*{5ª Questão}
-
-Para esta questão, algumas adaptações fizeram-se necessárias, haja vista os parâmetros selecionados inicialmente.
-Em primeiro lugar, o uso da escala logarítmica aqui dificultaria a visualização dos dados, já que a média, as probabilidades e as taxas foram selecionadas de forma a facilitar a visualização em escala linear.
-Em segundo lugar, foi calculado o erro quadrático médio em vez do módulo do erro médio.
-Na prática, isto não faz nenhuma diferença, exceto que o gráfico observado será uma parábola em vez de uma reta.
-
-Ao contrário do esperado, o erro quadrático médio cresceu com o aumento da distribuição, embora o aumento tenha sido muito reduzido para ser considerado significativo. 
-É provável que este tenha sido um \emph{outlier} em termos de simulação. 
-Pode indicar, ainda, um viés na ferramenta de seleção pseudoaleatória utilizada para implementar a rotina \emph{Random}.
-
-
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{fig7_250.png}
-	\centering
-	
-	\caption{Erro quadrático médio encontrado com $250$, $500$, $1000$ e $2000$ iterações, respectivamente, de baixo para cima.}
-	\label{}
-\end{figure}
-
-%----------------------------------------------------------------------------------------
 
 
 \end{document}

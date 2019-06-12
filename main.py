@@ -5,22 +5,24 @@ import math
 import re
 from scipy.stats import norm
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 
-def implied_volatility(target_value, call, s, k, t, r):
+def implied_volatility(v, call, s, k, t, r):
     limit = 100
     max_error = 1.0e-5
     sigma = 0.5
+    t = (frame["exercise date"][0] - datetime.today()).days
 
     for i in range(0, limit):
         price = bs(call, s, k, t, r, sigma)
-        vega = vega(call, s, k, t, r, sigma)
+        veg = vega(call, s, k, t, r, sigma)
 
-        diff = target_value - price
+        diff = v - price
 
         if (abs(diff) < max_error):
             return sigma
-        sigma = sigma + diff/vega
+        sigma = sigma + diff/veg
 
     return sigma
 
