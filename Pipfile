@@ -3,9 +3,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[packages]
+numpy = "*"
+matplotlib = "*"
+scipy = "*"
+jupyter = "*"
+pandas = "*"
+"bs4" = "*"
+lxml = "*"
+
 [dev-packages]
 
-[packages]
-
 [requires]
-python_version = "2.7"
+python_version = "3.6"
