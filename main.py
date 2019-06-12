@@ -48,24 +48,29 @@ frame = pd.read_csv("csv/SI_D_ROPC.txt", sep="|", header=None, skiprows=1,
                            "option type"])
 
 frame[frame["stock"]=="PETR"].sort_values(by=["exercise date", "series"])
-frame.filter(["stock", "exercise date", "series", "strike price"])
+frame = frame.filter(["stock", "exercise date", "series", "strike price"])
 frame["call"] = frame["series"].str.get(4) < "L"
-
-frame['implied volatility'] = frame.apply(lambda x: implied_volatility(x['value_1'],
-                                                                       x['call'],
-                                                                       29.85,
-                                                                       x['strike price'],
-                                                                       x['exercise date'],
-                                                                       0.065), axis=1)
+frame["option price"] = 0.0
 
 with open("html/Opções de compra | Valor Econômico.html") as f:
     html_string = f.read()
 soup = BeautifulSoup(html_string, 'lxml')
 table = soup.find_all('table')[0]
 rows = table.find_all('tr', {'class': 'row'})[2:] # skip first 2 rows
+regexp = r"([A-Z]+\d+)([A-Z]{4}).*([a-z]{3}\/\d{2})(\d{1,2}\,\d{2})[\d]+\,[\d]{2}[\d]+\,[\d]{2}[\d]+\,[\d]{2}([\d]+\,[\d]{2})"
 
-regexp = r"^([A-Z]{5}\d+)([A-Z]{4})\s+[O|P|N]{2,4}([a-z]{3}/\d{2})(\d+.\d+)-*(\d+.\d+)"
 quotes = [re.search(regexp, i.get_text()).groups() for i in rows]
+
+for q in quotes:
+    frame.loc[frame["series"]==q[0], "option price"] = float(q[4].replace(",", "."))
+
+
+frame['implied volatility'] = frame.apply(lambda x: implied_volatility(x['value_1'],
+                                                                       x['call'],
+                                                                       29.85,
+                                                                       x['strike price'],
+                                                                       x['exercise date'],
+                                                                       x["option price"]), axis=1)
 
 new_table = pd.DataFrame(columns=range(0,2), index = [0]) # I know the size 
 
