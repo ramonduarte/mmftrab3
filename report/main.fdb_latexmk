@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1560387501 "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.tex" "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.pdf" "main" 1560387502
+["pdflatex"] 1560387646 "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.tex" "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.pdf" "main" 1560387646
   "/etc/texmf/web2c/texmf.cnf" 1532896320 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.aux" 1560387502 1057 f242fab5c1e103830f53c648afb43020 ""
-  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.tex" 1560387501 7490 7e52cacad987f7adc8981bfcbf479fca ""
+  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.aux" 1560387646 1057 f242fab5c1e103830f53c648afb43020 ""
+  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.tex" 1560387645 7497 97599c02487037ca7beb27437d697172 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/xcharter/xch_q7u3cc.enc" 1509663637 3608 d4b77c790f9471e158b945b7021f3f80 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/xcharter/xch_tuu2ww.enc" 1509663637 3152 ae295da8277f5437c43ccc413c3e78ec ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
@@ -224,12 +224,12 @@
   "Figure_1.png" 1560386286 17314 6d84c05955dfff104df5731b12e342fe ""
   "Figure_2.png" 1560386293 15974 b2bc03aba15ad465902c91c9b79587b9 ""
   "Figure_3.png" 1560386477 110360 1a7f1ac5e2f480f60c88c83ff6a9e589 ""
-  "main.aux" 1560387502 1057 f242fab5c1e103830f53c648afb43020 ""
-  "main.tex" 1560387501 7490 7e52cacad987f7adc8981bfcbf479fca ""
+  "main.aux" 1560387646 1057 f242fab5c1e103830f53c648afb43020 ""
+  "main.tex" 1560387645 7497 97599c02487037ca7beb27437d697172 ""
   "structure.tex" 1560132267 6695 ab7e9ff7aeb9df65d68f64a318f452cc ""
   (generated)
-  "main.log"
-  "main.pdf"
-  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.log"
-  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.pdf"
   "main.aux"
+  "main.pdf"
+  "main.log"
+  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.pdf"
+  "/home/ramon/Documents/PycharmProjects/mmftrab3/report/main.log"
