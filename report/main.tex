@@ -52,7 +52,7 @@ Para tal, foi utilizada a linguagem \emph{Python 3.6.7}, com os módulos \emph{n
 
 Os dados utilizados para a confecção das comparações foi raspado da web utilizando as ferramentas \emph{bs4} (web parsing), \emph{lxml} (HTML parsing) e \emph{re} (expressões regulares). O programa requer a instalação destes módulos, mas possui uma ferramenta de instalação automatizada das dependências (\emph{pipenv}). 
 
-As fontes dos dados são a B3 (Brasil Bolsa Balcão, operadora da Bolsa de Valores de São Paulo) e o jornal Valor Econômico. Todos os dados são referentes ao mercado logo após o fechamento (17:00) do dia 6º de junho de 2019.
+As fontes dos dados são a B3 (Brasil Bolsa Balcão, operadora da Bolsa de Valores de São Paulo) e o jornal Valor Econômico. Todos os dados são referentes ao mercado logo após o fechamento (17:00) do dia 6º de junho de 2019. O ativo utilizado, \textbf{PETR4 ON}, fechou o pregão a $R\$ $ $29,85$.
 
 
 O código utilizado neste trabalho, bem como o deste relatório e as imagens geradas, foi aberto e disponibilizado publicamente no repositório https://github.com/ramonduarte/mmftrab3.
@@ -64,35 +64,49 @@ O código utilizado neste trabalho, bem como o deste relatório e as imagens ger
 
 \section*{Atividade \emph{a}} % Numbered section
 
-Nesta atividade, foi implementado o algoritmo sugerido no livro em seu capítulo 1.3.
-O procedimento é composto de três etapas:
+Nesta atividade, foi implementado o modelo de Black-Scholes da seguinte forma:
 
 \begin{enumerate}
-	\item obtenção dos valores finais, com especial atenção para evitar a explosão combinatória típica do modelo binomial.
-	\item cálculo recursivo dos valores intermediários utilizando os valores finais.
-	\item dedução do valor inicial $V_{0}$ do contrato, que também representa seu custo pela teoria de precificação da arbitragem.
+	\item Conforme definição, o modelo de Black-Scholes define preços de opções como uma função do preço do ativo subjacente $S$, do preço de execução $K$ (também chamado de \emph{strike price}), da taxa de renda fixa $r$ (aqui foi usada a Taxa Selic), do tempo até o prazo de execução $t$ e da volatilidade $\sigma$.
+	
+	\[V = BS(S,K,r,T,\sigma)\]
+
+	\item Como todos os valores acima são conhecidos exceto a volatilidade, é possível descrever o preço da opção como uma função somente dela.
+		
+	\[V = BS(\sigma)\]
+
+	\item Para tanto, é necessário descobrir o valor da opção $V$. Como o modelo de Black-Scholes apoia-se na premissa da \emph{informação perfeita}, podemos considerar que toda opção negociada na bolsa de valores está decentemente precificada.
+	\item No entanto, não é possível manipular a equação de Black-Scholes para isolar o valor da volatilidade, de forma que a única maneira de calculá-la é utilizar a técnica de bisseção. 
 \end{enumerate}
 
-Os contratos escolhidos possuem os mesmos parâmetros, tanto para a opção de compra, quanto para a opção de venda:
-
-\begin{itemize}
-	\item valor inicial do ativo: 4
-	\item taxa de valorização: 100%
-	\item taxa de desvalorização: 50%
-	\item taxa de renda fixa: 25%
-	\item preço de \emph{strike}: 5
-\end{itemize}
-
-Estes parâmetros foramutilizados junto às probabilidades neutras a risco $\tilde{p} = \tilde{q} = 0.5$.
-Foram calculados os valores para 10 simulações, tais que $N = 2^{k}; k = 1, 2, ..., 10$.
+Com os valores obtidos, foram gerados gráficos $K \times T$ para opções de compra e venda do ativo \textbf{PETR4\ ON} para exercício em três datas: 17/06/2019, 19/08/2019 e 20/01/2020, respectivamente.
+As opções não foram separadas entre derivativos europeus e americanos.
+No entanto, somente foram incluídos derivativos europeus e americanos.
+Contratos exóticos e/ou dependentes de caminho não foram incluídos.
 
 
 
 \begin{figure}[]
-	\includegraphics[width=\linewidth]{Figure_1.png}
+	\includegraphics[width=0.9\linewidth]{Figure_0.png}
 	\centering
 	
-	\caption{Passeios aleatórios com $S_{0} = 100$, $u = 1.024$, $d = 1/u = 0.9765625$ e $p = q = 0.5$.}
+	\caption{Gráfico $K \times \sigma$ para opções do ativo \textbf{PETR4 ON} com data de exercício 17/06/2019.}
+	\label{}
+\end{figure}
+
+\begin{figure}[]
+	\includegraphics[width=0.9\linewidth]{Figure_1.png}
+	\centering
+	
+	\caption{Gráfico $K \times \sigma$ para opções do ativo \textbf{PETR4 ON} com data de exercício 19/08/2019.}
+	\label{}
+\end{figure}
+
+\begin{figure}[]
+	\includegraphics[width=0.9\linewidth]{Figure_2.png}
+	\centering
+	
+	\caption{Gráfico $K \times \sigma$ para opções do ativo \textbf{PETR4 ON} com data de exercício 20/01/2020.}
 	\label{}
 \end{figure}
 
@@ -101,17 +115,21 @@ Foram calculados os valores para 10 simulações, tais que $N = 2^{k}; k = 1, 2,
 %----------------------------------------------------------------------------------------
 
 
-\section*{Atividade b}
+\section*{Atividade \emph{b}}
 
-Os boxplots foram gerados usando o módulo \emph{matplotlib.pyplot.boxplot}.
-Para facilitar a comparação dos boxplots, eles foram agrupados em subplots no mesmo gráfico.
-\emph{Outliers} foram marcados com quadrados vermelhos.
+Para esta atividade, o processo utilizado foi o mesmo do da anterior.
+As únicas mudanças foram:
+
+\begin{itemize}
+	\item Uma subbiblioteca do \emph{matplotlib}, externa ao \emph{pyplot}, teve de ser utilizada para gerar o gráfico em 3D, porque o \emph{pyplot} não gera gráficos 3D interativos, necessários para a escolha da melhor perspectiva.
+	\item Todas as opções encontradas para o ativo \textbf{PETR4 ON} foram utilizadas, desde que estivessem precificadas após o fechamento do pregão da Bolsa de Valores de São Paulo em 06/06/2019.
+\end{itemize}
 
 \begin{figure}[H]
-	\includegraphics[width=\linewidth]{fig1_250.png}
+	\includegraphics[width=\linewidth]{Figure_3.png}
 	\centering
 	
-	\caption{Boxplots com $250$, $500$, $1000$ e $2000$ iterações, respectivamente, de baixo para cima.}
+	\caption{\textbf{Superfície de volatilidade}: séries $K \times \sigma$ separadas por data de exercício.}
 	\label{}
 \end{figure}
 
@@ -121,22 +139,11 @@ Para facilitar a comparação dos boxplots, eles foram agrupados em subplots no 
 
 \section*{Atividade c}
 
-Para esta questão, os boxplots foram refeitos utilizando os parâmetros $\Delta t = 0.25$ e $u = 1/d = \sqrt{1.024}$.
-Esta configuração gerou uma variância consideravelmente menor, bem como uma quantidade significativamente menor de \emph{outliers}.
-Embora todos os ativos pudessem atingir as mesmas taxas de crescimento e decrescimento que no cenário anterior - apesar das taxas serem menores, o maior número de iterações compensa proporcionalmente a redução -, foram raros os ativos que obtiveram mais de 30\% de variação, um cenário bastante comum na segunda questão.
+Com exceção da \emph{Figura 3}, foi possível enxergar o \emph{smile} em todos os gráficos plotados.
+Como o ativo \textbf{PETR4 ON} é bastante negociado na bolsa de valores, suas distribuições tendem a se aproximarem do previsto pelo modelo teórico.
+É justamente por isso que, na \emph{Figura 3}, a observação do \emph{smile} é mais difícil, pois as opções com exercício nesta data - mais distante - são menos negociadas e, portanto, não formam pontos suficientes para a construção da curva com visibilidade.
 
-Este fenômeno foi observado porque, como $E[\bar{S}] = E[S_{0}]$ e $E[S(n)] = E[S(n+1)]$, um número maior de repetições tende a aproximar os resultados da média.
-A redução da variância em distribuições probabilísticas por conta da ampliação do espaço amostral é bastante conhecida e documentada. 
-
-\begin{figure}[H]
-	\includegraphics[width=\linewidth]{fig3_250.png}
-	\centering
-	
-	\caption{Boxplots com $250$, $500$, $1000$ e $2000$ iterações, respectivamente, de baixo para cima.}
-	\label{}
-\end{figure}
-
-
+Na \emph{Figura 4}, inclusive, é possível notar a formação de várias curvas deste tipo ao longo das datas de exercício, bem como seu rareamento conforme o aumento do prazo.
 
 
 \end{document}
